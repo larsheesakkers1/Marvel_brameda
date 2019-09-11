@@ -1,0 +1,35 @@
+{% extends "series/base.html" %}
+{% block content %}
+{% if series %}
+    <div class="container">
+        <div class="pagination">
+            {% if series.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ series.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>{{series.number}}</span>
+            <span">of</span>
+            <span>{{ series.paginator.num_pages }}</span>
+            {% if series.has_next %}
+                <a href="?page={{ series.next_page_number }}">Next</a>
+                <a href="?page={{ series.paginator.num_pages }}">Last</a>
+            {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 blockcenter">
+                    {% for serie in series %}
+                        <a href="{% url 'series:detail' serie.serieId %}">
+                            <div class="card" style="width: 30em;">
+                                <div class="card-body">
+                                    <p class="card-text">{{serie.title }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <p>No series are available.</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

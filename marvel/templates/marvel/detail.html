@@ -1,0 +1,38 @@
+{% extends "marvel/base.html" %}
+{% block content %}
+    {% if comic %}
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Id</td>
+              <td>{{comic.comicId}}</td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td>{{comic.title}}</td>
+            </tr>
+            <tr>
+              <td>Serie</td>
+              <td><a href="{% url 'series:detail' serieId %}">{{comic.series.name}}</a></td>
+            </tr>
+            <tr>
+              <td>Characters</td>
+              <td>
+                {% if comic.characters %}
+                    <ul>
+                        {% for char in comic.characters %}
+                            <li><a href="{% url 'characters:detail' char.id %}">{{char.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No character are available.</p>
+                {% endif %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+     {% else %}
+            <p>No comic found.</p>
+    {% endif %}
+    <p>
+{% endblock content %}

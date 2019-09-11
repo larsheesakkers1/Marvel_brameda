@@ -1,0 +1,36 @@
+{% extends "marvel/base.html" %}
+{% block content %}
+{% if commics %}
+    <div class="container">
+        <div class="pagination">
+            {% if commics.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ commics.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>{{commics.number}}</span>
+            <span">of</span>
+            <span>{{ commics.paginator.num_pages }}</span>
+            {% if commics.has_next %}
+                <a href="?page={{ commics.next_page_number }}">Next</a>
+                <a href="?page={{ commics.paginator.num_pages }}">Last</a>
+            {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 blockcenter">
+                    {% for comic in commics %}
+                        <div class="card" style="width: 18rem;">
+                            <a href="{% url 'marvel:detail' comic.comicId %}">
+                              <img class="card-img-top" src="{{comic.thumbnail}}.jpg" alt="Card image cap">
+                              <div class="card-body">
+                                <p class="card-text">{{comic.title }}</p>
+                              </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No commics are available.</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

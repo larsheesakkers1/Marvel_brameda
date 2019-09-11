@@ -1,0 +1,36 @@
+{% extends "characters/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="pagination">
+            {% if characters.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ characters.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>{{ characters.number }}</span>
+            <span">of</span>
+            <span>{{ characters.paginator.num_pages }}</span>
+            {% if characters.has_next %}
+                <a href="?page={{ characters.next_page_number }}">Next</a>
+                <a href="?page={{ characters.paginator.num_pages }}">Last</a>
+            {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 blockcenter">
+            {% if characters %}
+                {% for character in characters %}
+                <a href="{% url 'characters:detail' character.characterId %}"></li>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text">{{character.name }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            {% else %}
+                <p>No characters are available.</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% if commics %}
+    <ul>
+    {% for comic in commics %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ comic.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

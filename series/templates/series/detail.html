@@ -1,0 +1,52 @@
+{% extends "series/base.html" %}
+{% block content %}
+    {% if serie %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 blockcenter">
+               <div class="card" style="width: 40rem;">
+                    <img class="card-img-top" src="{{serie.thumbnail}}" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <ul>
+                                <li>ID: {{serie.serieId}}</li>
+                                <li>Title: {{serie.serieId }}</li>
+                                <li>Description: {{serie.description}}</li>
+                                <li>StartYear: {{serie.startYear }}</li>
+                                <li>EndYear: {{serie.endYear}}</li>
+                                <li>Rating: {{serie.rating }}</li>
+                                <li>
+                                    Creators
+                                    <ul>
+                                        {% for creators in serie.creators.items %}
+                                            <li>{{creators.name}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li>
+                                    Characters
+                                    <ul>
+                                        {% for character in serie.characters %}
+                                             <li><a href="{% url 'characters:detail' character.id %}">{{character.name}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                 <li>
+                                    Comics
+                                    <ul>
+                                        {% for comic in serie.comics %}
+                                             <li><a href="{% url 'marvel:detail' comic.id %}">{{comic.name}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <p>No serie found.</p>
+    {% endif %}
+{% endblock content %}
