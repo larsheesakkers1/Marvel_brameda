@@ -126,5 +126,4 @@ STATICFILES_DIRS = [
 ]
 
 # app settings
-MARVEL_BASE_PATH = 'http://gateway.marvel.com/v1/public/'
-MARVEL_APIKEY = '?apikey=1e229818860f7081c532e634d8f6ae65&ts=1504796200286&hash=e02be810b65957f4b60b71ca89b8835f'
+
